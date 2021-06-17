@@ -10,7 +10,6 @@ import cv2
 import glob
 import os
 
-
 class calibration():
     # monocular camera calibration
     def __init__(self):
@@ -23,36 +22,12 @@ class calibration():
         self.imgpoints2 = []
         self.cap0 = cv2.VideoCapture(0)
         self.cap1 = cv2.VideoCapture(1)
+        if self.cap0 ==False or self.cap1 == False :
+            print("Camera Initial failed!")
         self.path_left = "../left_cali_6"
         self.path_right = "../right_cali_6"
 
-    def capture_calibration(self):
-        n = 0
-        while(1):
-            ret0, frame0 = self.cap0.read()
-            ret1, frame1 = self.cap1.read()
-            #cv2.imshow("capture0",frame0)
-            #cv2.imshow("capture1",frame1)
 
-
-            if ret0 == True and ret1 == True:
-                k=cv2.waitKey(1)
-                if(k == ord("q")):
-
-                    break
-                elif(k == ord("p")):
-                    if not os.path.exists(self.path_left):
-                        os.mkdir(self.path_left)
-                    if not os.path.exists(self.path_right):
-                        os.mkdir(self.path_right)
-                    cv2.imwrite(self.path_left + "/left0" + str(n) + ".jpg", frame0)
-                    cv2.imwrite(self.path_right + "/right0" + str(n) + ".jpg", frame1)
-                    print(n)
-                    n += 1
-
-        self.cap0.release()
-        self.cap1.release()
-        cv2.destroyAllWindows()
 
     def monocular_calibration(self):
 

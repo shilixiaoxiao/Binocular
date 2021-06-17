@@ -10,55 +10,15 @@ import cv2
 import glob
 from stereo_calibration import calibration
 
-class calculate:
+class calculate():
     def __init__(self):
         self.cap0 = cv2.VideoCapture(0)
         self.cap1 = cv2.VideoCapture(1)
         self.size = (12,8)
 
-    def capture_1_frame(self):
-        cap0 = self.cap0
-        cap1 = self.cap1
-        while (1):
-
-            ret0, frame0 = cap0.read()
-            ret1, frame1 = cap1.read()
-            cv2.imshow("capture0", frame0)
-            cv2.imshow("capture1", frame1)
-
-            if ret0 == True and ret1 == True:
-                k = cv2.waitKey(1)
-                if (k == ord("q")):
-                    break
-                elif (k == ord("p")):
-                    if not os.path.exists("../left_tmp"):
-                        os.mkdir("../left_tmp")
-                    if not os.path.exists("../right_tmp"):
-                        os.mkdir("../right_tmp")
-                    cv2.imwrite("../left_tmp/left_tmp.jpg", frame0)
-                    cv2.imwrite("../right_tmp/right_tmp.jpg", frame1)
-                    print("capture successed!")
-
-        cap0.release()
-        cap1.release()
-        cv2.destroyAllWindows()
-
-    def auto_get_1_frame(self):
 
 
-        ret0, frame0 = self.cap0.read()
-        ret1, frame1 = self.cap1.read()
-        cv2.imshow("capture0", frame0)
-        cv2.imshow("capture1", frame1)
 
-        if ret0 == True and ret1 == True:
-            if not os.path.exists("../left_tmp"):
-                os.mkdir("../left_tmp")
-            if not os.path.exists("../right_tmp"):
-                os.mkdir("../right_tmp")
-            cv2.imwrite("../left_tmp/left_tmp.jpg", frame0)
-            cv2.imwrite("../right_tmp/right_tmp.jpg", frame1)
-            print("capture successed!")
 
     def remap(self):
         #cali = calibration()
